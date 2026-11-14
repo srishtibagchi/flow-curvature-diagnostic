@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flow-curvature-diagnostic"
+version = "0.1.0"
+description = "Reproducible trajectory-curvature baselines for flow matching"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=2.2,<3",
+    "scipy>=1.11,<2",
+    "matplotlib>=3.8,<4",
+]
+
+[project.optional-dependencies]
+neural = ["torch>=2.2,<3"]
+notebook = ["jupyterlab>=4,<5", "ipykernel>=6,<8"]
+
+[dependency-groups]
+dev = ["pytest>=8,<10"]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[project.scripts]
+flow-curvature = "flow_curvature.experiment:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
