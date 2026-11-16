@@ -83,3 +83,14 @@ def summarize(diagnostics: dict[str, Array]) -> dict[str, dict[str, float]]:
         }
         for name, values in diagnostics.items()
     }
+
+
+def scale_invariant_diagnostics(diagnostics: dict[str, Array]) -> dict[str, Array]:
+    """Scale invariance is not invariance under anisotropic maps or decoding."""
+    length, chord = diagnostics["path_length"], diagnostics["chord_length"]
+    ratio = np.full_like(length, np.nan)
+    np.divide(length, chord, out=ratio, where=chord > np.finfo(np.float64).eps * length)
+    return {
+        "normalized_bending": diagnostics["bending_energy"] * length,
+        "relative_length_excess": ratio - 1,
+    }

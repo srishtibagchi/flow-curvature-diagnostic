@@ -16,6 +16,14 @@ dependencies = [
 
 [project.optional-dependencies]
 neural = ["torch>=2.2,<3"]
+image = [
+    "torch>=2.14,<3",
+    "torchvision>=0.29.1,<=0.29.2",
+    "diffusers==0.37.0",
+    "transformers==4.57.6",
+    "accelerate>=0.31,<2",
+    "huggingface-hub>=0.34,<1",
+]
 notebook = ["jupyterlab>=4,<5", "ipykernel>=6,<8"]
 
 [dependency-groups]
@@ -23,6 +31,7 @@ dev = ["pytest>=8,<10"]
 
 [tool.uv.sources]
 torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
 
 [[tool.uv.index]]
 name = "pytorch-cpu"
@@ -31,6 +40,7 @@ explicit = true
 
 [project.scripts]
 flow-curvature = "flow_curvature.experiment:main"
+flow-curvature-images = "flow_curvature.image_experiment:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

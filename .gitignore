@@ -5,6 +5,7 @@ __pycache__/
 .pytest_cache/
 .ipynb_checkpoints/
 data/**/*.npz
+data/images/
 results/
 build/
 dist/
